@@ -25,13 +25,13 @@ const Login = () => {
     return (
         <div>
             <div className="min-h-screen flex items-center justify-center  px-4">
-                <div className="w-full max-w-sm p-8 border border-gray-700 rounded-2xl shadow-md">
+                <div className="w-full max-w-sm p-8 border border-gray-300 rounded-2xl ">
                     <h2 className="text-2xl font-bold text-center mb-6">Login to Your Account</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* Email */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-100 mb-1">Email</label>
+                            <label className="block text-sm font-medium text-gray-800 mb-1">Email</label>
                             <input
                                 type="email"
                                 placeholder="you@example.com"
@@ -45,7 +45,7 @@ const Login = () => {
 
                         {/* Password with show/hide */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-100 mb-1">Password</label>
+                            <label className="block text-sm font-medium text-gray-800 pb-1">Password</label>
                             <div className="relative">
                                 <input
                                     type={showPassword ? "text" : "password"}
@@ -85,15 +85,15 @@ const Login = () => {
                     {/* Google Sign-In */}
                     <button
                         onClick={handleGoogleLogin}
-                        className="w-full flex items-center justify-center gap-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50/10 transition"
+                        className="w-full flex items-center justify-center gap-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50/90 transition"
                     >
                         <FcGoogle size={20} />
                         <span className="text-sm font-medium">Continue with Google</span>
                     </button>
 
-                    <p className="text-center text-sm text-gray-100 mt-4">
+                    <p className="text-center text-sm text-gray-800 mt-4">
                         Don’t have an account?{" "}
-                        <a href="/register" className="text-gray-300 font-medium hover:underline">
+                        <a href="/register" className="text-gray-900 font-medium hover:underline">
                             Sign up
                         </a>
                     </p>
