@@ -6,13 +6,15 @@ import { FcGoogle } from "react-icons/fc";
 import { imageUpload } from "../../api/imageUpload";
 import { Loader } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const [imagePreview, setImagePreview] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { createUser, updateUser } = useAuth()
+    const { createUser, updateUser, signInWithGoogle } = useAuth()
+    const axiosPublic = useAxiosPublic()
 
     const onSubmit = async (data) => {
         setLoading(true)
@@ -29,11 +31,12 @@ const Register = () => {
                 await updateUser(name, photoURL)
 
                 // Save user to database
-                // const res = await axiosPublic.post(`/users/${email}`, {
-                //     name,
-                //     email,
-                //     image: photoURL
-                // });
+                const res = await axiosPublic.post(`/users/${email}`, {
+                    name,
+                    email,
+                    image: photoURL
+                });
+                console.log(res);
 
                 //     if (res.data.insertedId) {
                 //         toast.success("User profile created successfully!");
@@ -41,35 +44,36 @@ const Register = () => {
                 //     }
                 //     navigate('/');
                 // }
-            }   
+            }
         } catch (err) {
             console.error(err);
         }
     };
 
     const handleGoogleSignIn = async () => {
-        // try {
-        //     const result = await signInWithGoogle();
-        //     if (result?.user) {
-        //         const { displayName, email, photoURL } = result.user;
+        try {
+            const result = await signInWithGoogle();
+            if (result?.user) {
+                const { displayName, email, photoURL } = result.user;
 
-        //         const res = await axiosPublic.post(`/users/${email}`, {
-        //             name: displayName,
-        //             email,
-        //             image: photoURL
-        //         });
+                const res = await axiosPublic.post(`/users/${email}`, {
+                    name: displayName,
+                    email,
+                    image: photoURL
+                });
+                console.log(res);
 
-        //         if (res.data.insertedId) {
-        //             toast.success("User profile created successfully!");
-        //             toast.success("SignIn successful!");
-        //         }
+                if (res.data.insertedId) {
+                    // toast.success("User profile created successfully!");
+                    // toast.success("SignIn successful!");
+                }
 
-        //         navigate('/');
-        //     }
-        // } catch (err) {
-        //     console.error(err);
-        //     toast.error("Google Sign-In failed!");
-        // }
+                // navigate('/');
+            }
+        } catch (err) {
+            console.error(err);
+            // toast.error("Google Sign-In failed!");
+        }
     };
 
     const handleImageChange = (e) => {
@@ -80,9 +84,9 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-green-100 via-white to-green-200 p-4">
-            <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
-                <h2 className="text-2xl font-bold text-center text-green-600">Create a New Account</h2>
+        <div className="min-h-screen flex items-center justify-center  p-4">
+            <div className="w-full max-w-md bg-white rounded-2xl border border-gray-300 p-8 space-y-6">
+                <h2 className="text-2xl font-bold text-center text-gray-900">Create a New Account</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     {/* Name */}
@@ -152,7 +156,7 @@ const Register = () => {
                         />
                         {imagePreview && (
                             <div className="mt-2 text-center">
-                                <img src={imagePreview} alt="Preview" className="w-24 h-24 rounded-full object-cover mx-auto" />
+                                <img src={imagePreview} alt="Preview" className="w-24 h-24 rounded-md object-cover mx-auto" />
                             </div>
                         )}
                         {errors.profilePicture && <p className="text-red-500 text-sm">{errors.profilePicture.message}</p>}

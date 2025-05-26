@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 const NavBar = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const inputRef = useRef(null);
-    const { user } = useAuth();
+    const { user, logOut } = useAuth();
 
     const navLinks = (
         <>
@@ -23,6 +23,12 @@ const NavBar = () => {
             <li><NavLink to="/new">New Arrival</NavLink></li>
         </>
     );
+
+    const handleLogOut = () => {
+        logOut()
+            .then(res => console.log(res))
+
+    }
 
     const handleBlur = () => {
         // Only auto-close on small screens
@@ -49,13 +55,12 @@ const NavBar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow space-y-3"
                         >
                             {navLinks}
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl flex items-center">
-                        <img className="w-10" src="/logo.png" alt="" />
                         LIBAS</a>
                 </div>
 
@@ -79,7 +84,7 @@ const NavBar = () => {
                                 placeholder="Search for products..."
                                 className={`
                   bg-transparent ml-2 outline-none text-sm transition-all duration-300
-                  ${isSearchOpen ? 'w-40' : 'w-0'}
+                  ${isSearchOpen ? 'w-34' : 'w-0'}
                   lg:w-64
                 `}
                                 style={{
@@ -108,7 +113,7 @@ const NavBar = () => {
                                             </a>
                                         </li>
                                         <li>
-                                            <button onClick={() => {/*  */ }}>
+                                            <button onClick={handleLogOut}>
                                                 Logout
                                             </button>
                                         </li>

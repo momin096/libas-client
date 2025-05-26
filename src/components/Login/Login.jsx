@@ -2,8 +2,13 @@ import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
+
+    const { logIn, signInWithGoogle } = useAuth()
+    const axiosPublic = useAxiosPublic()
     const {
         register,
         handleSubmit,
@@ -13,13 +18,36 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const onSubmit = (data) => {
-        console.log("Login Data:", data);
-        // TODO: Handle login logic here
+        const { email, password } = data || {}
+
+        logIn(email, password)
+            .then(data => console.log(data))
     };
 
-    const handleGoogleLogin = () => {
-        console.log("Google Sign In Triggered");
-        // TODO: Add Google OAuth here
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await signInWithGoogle();
+            if (result?.user) {
+                const { displayName, email, photoURL } = result.user;
+
+                const res = await axiosPublic.post(`/users/${email}`, {
+                    name: displayName,
+                    email,
+                    image: photoURL
+                });
+                console.log(res);
+
+                if (res.data.insertedId) {
+                    // toast.success("User profile created successfully!");
+                    // toast.success("SignIn successful!");
+                }
+
+                // navigate('/');
+            }
+        } catch (err) {
+            console.error(err);
+            // toast.error("Google Sign-In failed!");
+        }
     };
 
     return (
