@@ -1,10 +1,12 @@
 import { Menu, Search, ShoppingCart, User } from "lucide-react";
 import { useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const NavBar = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const inputRef = useRef(null);
+    const { user } = useAuth();
 
     const navLinks = (
         <>
@@ -54,7 +56,7 @@ const NavBar = () => {
                     </div>
                     <a className="btn btn-ghost text-xl flex items-center">
                         <img className="w-10" src="/logo.png" alt="" />
-                        BANYAN</a>
+                        LIBAS</a>
                 </div>
 
                 <div className="navbar-center hidden lg:flex">
@@ -90,9 +92,35 @@ const NavBar = () => {
                     </div>
 
                     <ShoppingCart className="w-6 h-6 cursor-pointer mx-4" />
-                    <Link to={'/login'}>
-                        <User className="w-6 h-6 cursor-pointer" />
-                    </Link>
+                    <div className="mr-2">
+                        {
+                            user ?
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-md">
+                                            <img src={user?.photoURL} alt="User" />
+                                        </div>
+                                    </div>
+                                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-40">
+                                        <li>
+                                            <a className="pointer-events-none text-gray-600">
+                                                {user?.displayName || "Anonymous"}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <button onClick={() => {/*  */ }}>
+                                                Logout
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                :
+                                <Link to={'/login'}>
+                                    <User className="w-6 h-6 cursor-pointer" />
+                                </Link>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
