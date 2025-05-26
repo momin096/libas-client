@@ -69,8 +69,8 @@ const Slider = () => {
                                 className="w-full max-w-lg mx-auto"
                             />
                             {/* Decorative stars (optional) */}
-                            <div className="absolute top-10 left-10 text-4xl text-black">✦</div>
-                            <div className="absolute bottom-10 right-10 text-4xl text-black">✦</div>
+                            <div className="absolute top-10 left-10 text-4xl text-black animate-pulse">✦</div>
+                            <div className="absolute bottom-10 right-10 text-4xl text-black animate-pulse">✦</div>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -114,8 +114,8 @@ const Slider = () => {
                                 className="w-full max-w-lg mx-auto"
                             />
                             {/* Decorative stars (optional) */}
-                            <div className="absolute top-10 left-10 text-4xl text-black">✦</div>
-                            <div className="absolute bottom-10 right-10 text-4xl text-black">✦</div>
+                            <div className="absolute top-10 left-10 text-4xl text-black animate-pulse">✦</div>
+                            <div className="absolute bottom-10 right-10 text-4xl text-black animate-pulse">✦</div>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -158,8 +158,8 @@ const Slider = () => {
                                 className="w-full max-w-lg mx-auto"
                             />
                             {/* Decorative stars (optional) */}
-                            <div className="absolute top-10 left-10 text-4xl text-black">✦</div>
-                            <div className="absolute bottom-10 right-10 text-4xl text-black">✦</div>
+                            <div className="absolute top-10 left-10 text-4xl text-black animate-pulse">✦</div>
+                            <div className="absolute bottom-10 right-10 text-4xl text-black animate-pulse">✦</div>
                         </div>
                     </div>
                 </SwiperSlide>
