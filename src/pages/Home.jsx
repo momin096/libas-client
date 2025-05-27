@@ -1,3 +1,4 @@
+import NewArrivals from "../components/NewArrivals/NewArrivals";
 import NavBar from "../components/shared/NavBar";
 import Slider from "../components/Slider/Slider";
 
@@ -6,6 +7,7 @@ const Home = () => {
         <div>
             <NavBar />
             <Slider />
+            <NewArrivals />
         </div>
     );
 };
