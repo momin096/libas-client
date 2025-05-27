@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { imageUpload } from '../api/imageUpload';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
+import { Fan, Loader } from 'lucide-react';
 
 export default function AddProduct() {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const axiosSecure = useAxiosSecure()
 
     const {
         register,
@@ -28,16 +32,22 @@ export default function AddProduct() {
         try {
             const imageUrls = await Promise.all(images.map((img) => imageUpload(img)));
 
-            const productData = {
-                ...data,
-                price: parseFloat(data.price),
-                images: imageUrls,
-            };
+            if (imageUrls) {
+                const productData = {
+                    ...data,
+                    price: parseFloat(data.price),
+                    images: imageUrls,
+                };
 
-            await axios.post('/api/products', productData);
-            alert('Product added successfully!');
-            reset();
-            setImages([]);
+
+                const res = await axiosSecure.post('/products', productData);
+                console.log(res);
+                if (res.data.insertedId) {
+                    toast.success('Product added successfully!')
+                    // reset();
+                    // setImages([]); 
+                }
+            }
         } catch (error) {
             console.error(error);
             alert('Failed to add product.');
@@ -168,7 +178,7 @@ export default function AddProduct() {
                         : 'bg-gray-700 hover:bg-gray-600'
                         }`}
                 >
-                    {loading ? 'Submitting...' : 'Submit Product'}
+                    {loading ? < Fan  className='animate-spin text-center mx-auto' /> : 'Add Product'}
                 </button>
             </form>
         </div>
