@@ -9,6 +9,7 @@ import ProductDetails from "../pages/ProductDetails";
 import ManageProducts from "../pages/ManageProducts";
 import UpdateProduct from "../pages/UpdateProduct";
 import NewArrivals from "../components/NewArrivals/NewArrivals";
+import Products from "../pages/Products";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: '/new-arrivals',
                 element: <NewArrivals />
+            },
+            {
+                path: '/products',
+                element: <Products />
             },
         ]
     },
