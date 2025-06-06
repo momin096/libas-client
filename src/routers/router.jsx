@@ -4,6 +4,11 @@ import Home from "../pages/Home";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import AddProduct from "../pages/AddProduct";
+import ProductCard from "../components/ProductCard/ProductCard";
+import ProductDetails from "../pages/ProductDetails";
+import ManageProducts from "../pages/ManageProducts";
+import UpdateProduct from "../pages/UpdateProduct";
+import NewArrivals from "../components/NewArrivals/NewArrivals";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +22,22 @@ const router = createBrowserRouter([
             {
                 path: '/add-product',
                 element: <AddProduct />
+            },
+            {
+                path: '/products/:id',
+                element: <ProductDetails />
+            },
+            {
+                path: '/manage-products',
+                element: <ManageProducts />
+            },
+            {
+                path: '/update-product/:id',
+                element: <UpdateProduct />
+            },
+            {
+                path: '/new-arrivals',
+                element: <NewArrivals />
             },
         ]
     },

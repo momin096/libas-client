@@ -90,7 +90,7 @@ export default function AddProduct() {
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-600">Discounted Price</label>
-                        <input type="number" step="0.01" {...register('discountedPrice', { required: 'Discounted price is required' })} className="w-full mt-1 px-4 py-2 border border-gray-400 rounded" />
+                        <input type="number" step="0.01" {...register('discountedPrice')} className="w-full mt-1 px-4 py-2 border border-gray-400 rounded" />
                         {errors.discountedPrice && <p className="text-sm text-red-400">{errors.discountedPrice.message}</p>}
                     </div>
                     <div>

@@ -10,7 +10,7 @@ const NavBar = () => {
 
     const navLinks = (
         <>
-            <li>
+            {/* <li>
                 <details>
                     <summary>Shop</summary>
                     <ul className="p-2">
@@ -18,10 +18,12 @@ const NavBar = () => {
                         <li><a>Submenu 2</a></li>
                     </ul>
                 </details>
-            </li>
+            </li> */}
+            <li><NavLink to="/products">All Products</NavLink></li>
             <li><NavLink to="/shop">On Sale</NavLink></li>
-            <li><NavLink to="/new">New Arrival</NavLink></li>
+            <li><NavLink to="/new-arrivals">New Arrival</NavLink></li>
             <li><NavLink to="/add-product">Add Product</NavLink></li>
+            <li><NavLink to="/manage-products">Manage Products Product</NavLink></li>
         </>
     );
 
@@ -61,8 +63,8 @@ const NavBar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl flex items-center">
-                        LIBAS</a>
+                    <Link to={'/'} className="btn btn-ghost text-xl flex items-center">
+                        LIBAS</Link>
                 </div>
 
                 <div className="navbar-center hidden lg:flex">

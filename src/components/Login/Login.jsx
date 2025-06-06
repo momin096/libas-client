@@ -4,11 +4,14 @@ import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
     const { logIn, signInWithGoogle } = useAuth()
     const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -35,14 +38,15 @@ const Login = () => {
                     email,
                     image: photoURL
                 });
-                console.log(res);
+
 
                 if (res.data.insertedId) {
-                    // toast.success("User profile created successfully!");
-                    // toast.success("SignIn successful!");
+                    toast.success("Register successful!");
+                    toast.success("User profile created successfully!");
                 }
+                
 
-                // navigate('/');
+                navigate('/');
             }
         } catch (err) {
             console.error(err);
